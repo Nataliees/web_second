@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Космическое агентство </title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+    <!-- Звёзды -->
+    <div class="stars"></div>
+
+    <!-- Созвездия -->
+    <svg class="constellations" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <!-- Большая Медведица (ковш) -->
+        <g class="constellation" opacity="0.15">
+            <line x1="15" y1="20" x2="22" y2="18" stroke="white" stroke-width="0.08"/>
+            <line x1="22" y1="18" x2="28" y2="22" stroke="white" stroke-width="0.08"/>
+            <line x1="28" y1="22" x2="35" y2="20" stroke="white" stroke-width="0.08"/>
+            <line x1="35" y1="20" x2="38" y2="28" stroke="white" stroke-width="0.08"/>
+            <line x1="38" y1="28" x2="32" y2="30" stroke="white" stroke-width="0.08"/>
+            <line x1="32" y1="30" x2="25" y2="28" stroke="white" stroke-width="0.08"/>
+            <line x1="25" y1="28" x2="22" y2="18" stroke="white" stroke-width="0.08"/>
+            <circle cx="15" cy="20" r="0.3" fill="white"/>
+            <circle cx="22" cy="18" r="0.3" fill="white"/>
+            <circle cx="28" cy="22" r="0.3" fill="white"/>
+            <circle cx="35" cy="20" r="0.3" fill="white"/>
+            <circle cx="38" cy="28" r="0.3" fill="white"/>
+            <circle cx="32" cy="30" r="0.3" fill="white"/>
+            <circle cx="25" cy="28" r="0.3" fill="white"/>
+        </g>
+
+        <!-- Орион (пояс) -->
+        <g class="constellation" opacity="0.12">
+            <line x1="60" y1="45" x2="65" y2="46" stroke="white" stroke-width="0.08"/>
+            <line x1="65" y1="46" x2="70" y2="45" stroke="white" stroke-width="0.08"/>
+            <line x1="60" y1="45" x2="58" y2="38" stroke="white" stroke-width="0.08"/>
+            <line x1="70" y1="45" x2="72" y2="38" stroke="white" stroke-width="0.08"/>
+            <line x1="60" y1="45" x2="58" y2="52" stroke="white" stroke-width="0.08"/>
+            <line x1="70" y1="45" x2="72" y2="52" stroke="white" stroke-width="0.08"/>
+            <circle cx="60" cy="45" r="0.25" fill="white"/>
+            <circle cx="65" cy="46" r="0.25" fill="white"/>
+            <circle cx="70" cy="45" r="0.25" fill="white"/>
+            <circle cx="58" cy="38" r="0.25" fill="white"/>
+            <circle cx="72" cy="38" r="0.25" fill="white"/>
+            <circle cx="58" cy="52" r="0.25" fill="white"/>
+            <circle cx="72" cy="52" r="0.25" fill="white"/>
+        </g>
+
+        <!-- Кассиопея (W-форма) -->
+        <g class="constellation" opacity="0.13">
+            <line x1="75" y1="70" x2="80" y2="75" stroke="white" stroke-width="0.08"/>
+            <line x1="80" y1="75" x2="85" y2="72" stroke="white" stroke-width="0.08"/>
+            <line x1="85" y1="72" x2="90" y2="77" stroke="white" stroke-width="0.08"/>
+            <line x1="90" y1="77" x2="95" y2="73" stroke="white" stroke-width="0.08"/>
+            <circle cx="75" cy="70" r="0.25" fill="white"/>
+            <circle cx="80" cy="75" r="0.25" fill="white"/>
+            <circle cx="85" cy="72" r="0.25" fill="white"/>
+            <circle cx="90" cy="77" r="0.25" fill="white"/>
+            <circle cx="95" cy="73" r="0.25" fill="white"/>
+        </g>
+
+        <!-- Лира -->
+        <g class="constellation" opacity="0.11">
+            <line x1="10" y1="60" x2="15" y2="65" stroke="white" stroke-width="0.08"/>
+            <line x1="15" y1="65" x2="20" y2="63" stroke="white" stroke-width="0.08"/>
+            <line x1="15" y1="65" x2="13" y2="72" stroke="white" stroke-width="0.08"/>
+            <line x1="15" y1="65" x2="18" y2="72" stroke="white" stroke-width="0.08"/>
+            <circle cx="10" cy="60" r="0.3" fill="white"/>
+            <circle cx="15" cy="65" r="0.25" fill="white"/>
+            <circle cx="20" cy="63" r="0.25" fill="white"/>
+            <circle cx="13" cy="72" r="0.25" fill="white"/>
+            <circle cx="18" cy="72" r="0.25" fill="white"/>
+        </g>
+
+        <!-- Малое созвездие (треугольник) -->
+        <g class="constellation" opacity="0.1">
+            <line x1="45" y1="80" x2="50" y2="85" stroke="white" stroke-width="0.08"/>
+            <line x1="50" y1="85" x2="55" y2="82" stroke="white" stroke-width="0.08"/>
+            <line x1="55" y1="82" x2="45" y2="80" stroke="white" stroke-width="0.08"/>
+            <circle cx="45" cy="80" r="0.25" fill="white"/>
+            <circle cx="50" cy="85" r="0.25" fill="white"/>
+            <circle cx="55" cy="82" r="0.25" fill="white"/>
+        </g>
+    </svg>
+
+    <main class="dashboard" id="dashboard"></main>
+
+    <footer class="app-footer">
+        <p>© 2026 Space Agency · Powered by Open-Meteo API & Random User API</p>
+    </footer>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>

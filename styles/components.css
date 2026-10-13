@@ -1,0 +1,538 @@
+/* ============================================================
+   ТУСКЛЫЕ СТЕКЛЯННЫЕ ПЛАШКИ (glassmorphism на чёрном фоне)
+   ============================================================ */
+.widget {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Верхний блик стекла — едва заметный */
+.widget::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.12) 50%,
+        transparent 100%);
+    pointer-events: none;
+}
+
+.widget:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.widget-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.5rem;
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+}
+
+/* Контент виджета растягивается и центрируется */
+.widget > *:not(.widget-title):not(.btn) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Кнопка всегда прижата к низу */
+.widget .btn {
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   КНОПКИ — только белая обводка и текст, без заливки
+   ============================================================ */
+.btn {
+    padding: 0.6rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    background: transparent;
+}
+
+.btn-primary {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-secondary {
+    width: 100%;
+}
+
+.btn-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================================
+   СОСТОЯНИЯ
+   ============================================================ */
+.loading {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+    text-align: center;
+    padding: 1rem;
+}
+
+.error {
+    color: #ff5c7c;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* ============================================================
+   АСТРОНАВТ
+   ============================================================ */
+.astronaut-profile {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.astronaut-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 0.8rem;
+    object-fit: cover;
+}
+
+.astronaut-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.astronaut-location,
+.astronaut-email {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+}
+
+/* ============================================================
+   ЦИТАТА
+   ============================================================ */
+.quote {
+    font-style: italic;
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.quote p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #ffffff;
+}
+
+.quote footer {
+    margin-top: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: normal;
+    font-weight: 500;
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   АСТРОНОМИЯ (AURORA WIDGET)
+   Плашки ВНУТРИ виджета — ТОЛЬКО ОБВОДКА, БЕЗ ЗАЛИВКИ
+   Большой блок сияния сверху + компактные Солнце и Луна РЯДОМ
+   ============================================================ */
+.aurora-widget {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 🔑 ГЛАВНОЕ ИЗМЕНЕНИЕ: убираем заливку и blur у внутренних плашек */
+.aurora-section {
+    padding: 0.9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: transparent !important;          /* ← без заливки */
+    backdrop-filter: none !important;            /* ← без размытия */
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
+.aurora-section-title {
+    font-size: 0.95rem;
+    color: #ffffff;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    justify-content: center;
+}
+
+/* Большой блок северного сияния сверху */
+.aurora-widget > .aurora-section-main {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex: 1 1 auto;
+    min-height: 160px;
+    margin-bottom: 0.8rem;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Солнце и Луна РЯДОМ в две равные колонки */
+.aurora-widget > .aurora-bottom-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    align-items: stretch !important;
+    flex-direction: row !important;
+    gap: 0.8rem;
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+/* Компактные плашки солнце/луна */
+.aurora-bottom-row .aurora-section {
+    padding: 0.7rem 0.6rem;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Солнце --- */
+.sun-section .sun-times {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.sun-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.sun-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.sun-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+.sun-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+}
+
+/* --- Луна --- */
+.moon-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    width: 100%;
+}
+
+.moon-visual {
+    flex-shrink: 0;
+}
+
+.moon-emoji {
+    font-size: 2rem;
+    display: block;
+    line-height: 1;
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5));
+}
+
+.moon-details {
+    width: 100%;
+    text-align: center;
+}
+
+.moon-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.3rem;
+}
+
+.moon-progress-bar {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+}
+
+.moon-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #fbbf24, #ff9f43);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+}
+
+.moon-progress-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* --- Ровный зазор от плашек до кнопки --- */
+.aurora-widget .btn {
+    margin-top: 1.2rem !important;
+}
+
+/* --- Индикатор сияния --- */
+.aurora-live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.aurora-probability {
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+.aurora-percent {
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 20px currentColor;
+    color: #ffffff;
+}
+
+.aurora-level-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 0.3rem;
+}
+
+.aurora-bar {
+    height: 10px;
+    width: 80%;
+    max-width: 280px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto 0.5rem;
+}
+
+.aurora-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.8s ease;
+    box-shadow: 0 0 12px currentColor;
+}
+
+.aurora-hint {
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+/* ============================================================
+   ЗАДАЧИ ЭКИПАЖА
+   Поле ввода увеличено до 85% ширины контейнера (≈2× текущего)
+   ============================================================ */
+.todo-widget {
+    height: auto;
+    min-height: 300px;
+}
+
+/* Форма занимает почти всю ширину виджета */
+.todo-widget .todo-form {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+    padding: 0;                    /* ← убрали внутренние отступы */
+    width: 100%;                   /* ← форма на всю ширину виджета */
+    max-width: 100%;               /* ← больше никаких ограничений */
+    margin-left: 0;                /* ← убираем автоцентрирование формы */
+    margin-right: 0;
+    flex: 0 !important;
+}
+
+/* 🔑 ГЛАВНОЕ ИЗМЕНЕНИЕ: поле = 85% ширины формы */
+.todo-widget .todo-input {
+    width: 85%;                    /* ← было flex:1 + max-width:2400px */
+    max-width: none;               /* ← снимаем cap, который ничего не делал */
+    flex: 0 0 85%;                 /* ← фиксируем долю, чтобы кнопка не съела место */
+    padding: 0.7rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+}
+
+.todo-widget .todo-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.todo-widget .todo-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Кнопка "+" справа, фиксированного размера */
+.todo-widget .todo-add-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+/* Список задач тоже на всю ширину */
+.todo-widget .todo-list {
+    list-style: none;
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 0;                    /* ← без боковых паддингов */
+    width: 100%;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+}
+
+.todo-widget .todo-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.todo-widget .todo-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 3px;
+}
+
+.todo-widget .todo-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+
+.todo-widget .todo-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.15s;
+}
+
+.todo-widget .todo-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 6px;
+}
+
+.todo-widget .todo-item:last-child {
+    border-bottom: none;
+}
+
+.todo-widget .todo-item.done .todo-text {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.todo-widget .todo-text {
+    flex: 1;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.todo-widget .todo-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #ffffff;
+}
+
+.todo-widget .btn-delete {
+    background: transparent;
+    color: #ff5c7c;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0 0.3rem;
+    line-height: 1;
+    transition: transform 0.15s;
+}
+
+.todo-widget .btn-delete:hover {
+    transform: scale(1.2);
+}
+
+.todo-widget .todo-empty {
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    padding: 1.5rem;
+    font-style: italic;
+}
